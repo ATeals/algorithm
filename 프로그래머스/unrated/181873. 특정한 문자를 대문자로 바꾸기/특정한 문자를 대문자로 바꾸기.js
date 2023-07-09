@@ -1,0 +1,1 @@
+const solution = (my_string, alp) =>my_string.replace(alp, alp.toUpperCase())
