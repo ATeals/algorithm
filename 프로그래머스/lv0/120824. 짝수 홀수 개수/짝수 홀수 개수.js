@@ -1,0 +1,1 @@
+const solution = (num_list) => num_list.reduce(([even,odd],crr)=> (crr%2)? [even,++odd] : [++even,odd] ,[0,0])
