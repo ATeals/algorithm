@@ -1,0 +1,1 @@
+const solution = (arr) => arr.map((str, i)=> i%2? str.toUpperCase() :str.toLowerCase())
