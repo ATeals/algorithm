@@ -1,10 +1,9 @@
 function solution(id_list, report, k) {
     
     const idMap = id_list.reduce((a,c)=>({...a , [c] : {arr : [], report : 0, mail : 0 }}), {})
-    
     let mute = []
       
-    report.map(i=>{
+    report.forEach(i=>{
         const [id, reportP] = i.split(" ");
         if(!idMap[id].arr.includes(reportP) ){
              idMap[id].arr =[...idMap[id].arr , reportP]
@@ -15,7 +14,7 @@ function solution(id_list, report, k) {
     mute = Object.keys(idMap).filter(i=> idMap[i].report >= k)
     
     
-    Object.keys(idMap).map(id=>{
+    Object.keys(idMap).forEach(id=>{
         mute.map(i=> {
             idMap[id].mail = idMap[id].arr.includes(i) ? ++idMap[id].mail : idMap[id].mail
         })
