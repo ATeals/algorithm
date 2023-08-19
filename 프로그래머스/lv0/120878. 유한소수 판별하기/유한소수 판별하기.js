@@ -10,7 +10,7 @@ const getGCD = (num1, num2) => {
     return gcd;
 }
 
-function sel(n) {
+const factorize = (n) => {
   let result = [];
   let divisor = 2;
   
@@ -27,12 +27,12 @@ function sel(n) {
   return [...new Set(result)];
 }
 
-function solution(a, b) {
+const solution = (a, b) => {
     
     const gcd = getGCD(a,b)
     const num = b / gcd
     
-    const selNum = sel(num)
+    const selNum = factorize(num)
     
     return selNum.filter(i=> !(i === 2 || i === 5) ).length === 0 ? 1 : 2
 }
