@@ -1,4 +1,4 @@
-function solution(n, arr1, arr2) {
+const solution = (n, arr1, arr2) => {
     const map = checkBlock(arr1,arr2, n)
     return map.map(i=>makeMap(decode(i, n)))
 }
