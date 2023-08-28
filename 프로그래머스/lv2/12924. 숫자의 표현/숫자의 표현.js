@@ -1,20 +1,2 @@
-const solution = (n) => {
-    let answer = 0;
-    
-    for (let start = 1; start <= n; start++) {
-        let sum = 0;
-        let count = 0;
-        
-        while (sum < n) {
-            sum += start + count;
-            count++;
-        }
-        
-        if (sum === n) {
-            answer++;
-        }
-    }
-    
-    return answer;
-}
+const solution = (n) => Array.from({length : n}, (_,i)=>i+1).reduce((a,c)=> (n % c == 0) && (c % 2 == 1)? ++a : a , 0)
 
