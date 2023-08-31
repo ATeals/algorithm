@@ -1,0 +1,1 @@
+const solution = (num) => num.slice(num.length-4,num.length).padStart(num.length, "*")
