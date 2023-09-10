@@ -1,5 +1,2 @@
-const solution = (s) => {
-    ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"].map((str, index)=>{ s = s.replaceAll(str, index)})
-    
-    return Number(s)
-}
+const solution = (s) =>
+   Number( ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"].reduce((a,c, i)=>a.replaceAll(c, i), s))
