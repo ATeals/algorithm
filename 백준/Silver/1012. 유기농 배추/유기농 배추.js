@@ -1,77 +1,43 @@
-const fs = require("fs");
-
-const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
-
-const input = fs
-  .readFileSync(__dirname + filePath)
-  .toString()
-  .trim()
-  .split("\n");
-
+const input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
+const num = Number(input.shift());
 const ds = [
   [-1, 0],
   [1, 0],
   [0, 1],
   [0, -1],
 ];
+function bfs(startX, startY) {
+  const queue = [[startX, startY]];
+  while (queue.length) {
+    const [x, y] = queue.shift();
 
-const solution = (w, h, graph) => {
-  let count = 0;
-  const visited = [];
+    if (!map[x][y]) continue;
+    else map[x][y] = 0;
 
-  const bfs = (startx, starty) => {
-    const queue = [[startx, starty]];
+    for (let i = 0; i < 4; i++) {
+      const xPos = x + ds[i][0];
+      const yPos = y + ds[i][1];
 
-    while (queue.length !== 0) {
-      const [x, y] = queue.shift();
-      visited[x][y] = false;
-
-      for (let i = 0; i < 4; i++) {
-        const xPos = x + ds[i][0];
-        const yPos = y + ds[i][1];
-
-        if (xPos < 0 || yPos < 0 || xPos >= w || yPos >= h) continue;
-        if (visited[xPos][yPos]) {
-          queue.push([xPos, yPos]);
-          visited[xPos][yPos] = false;
-        }
-      }
+      if (xPos < 0 || yPos < 0 || xPos >= M || yPos >= N) continue;
+      if (map[xPos][yPos]) queue.push([xPos, yPos]);
     }
-  };
-
-  for (let i = 0; i < w; i++) {
-    visited[i] = new Array(h).fill(false);
   }
-
-  for (let [x, y] of graph) {
-    if (x < w && y < h) visited[x][y] = true;
+}
+for (let i = 0; i < num; i++) {
+  let worm = 0;
+  var [M, N, K] = input.shift().split(" ").map(Number);
+  var map = Array.from(Array(M), () => new Array(N).fill(0));
+  for (let j = 0; j < K; j++) {
+    let xy = input.shift().split(" ");
+    map[xy[0]][xy[1]] = 1;
   }
-
-  for (let i = 0; i < w; i++) {
-    for (let j = 0; j < h; j++) {
-      if (visited[i][j]) {
-        bfs(i, j);
-        count++;
+  for (let k = 0; k < M; k++) {
+    for (let l = 0; l < N; l++) {
+      if (map[k][l]) {
+        bfs(k, l);
+        worm++;
       }
     }
   }
-
-  return count;
-};
-
-const re = Number(input.shift());
-
-for (let i = 0; i < re; i++) {
-  const [w, h, k] = input.shift().split(" ").map(Number);
-  let graph = [];
-  for (let j = 0; j < k; j++) {
-    graph.push(
-      input
-        .shift()
-        .split(" ")
-        .map((i) => Number(i))
-    );
-  }
-  console.log(solution(w, h, graph));
-  graph = [];
+  console.log(worm);
 }
